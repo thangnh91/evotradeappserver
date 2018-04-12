@@ -11,6 +11,7 @@ public class ConfigDao {
 	public static final int PROPERTY = 0;
 	public static final int FILE = 1;
 	public static final int MYSQL = 2;
+	public static final int POSTGRESQL = 3;
 	
 	public static int database = PROPERTY;
 	
@@ -33,7 +34,11 @@ public class ConfigDao {
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
         String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
-
+        
+        System.out.println("dbUrl=" + dbUrl);
+        System.out.println("username=" + username);
+        System.out.println("password=" + password);
+        
         BasicDataSource basicDataSource = new BasicDataSource();
         basicDataSource.setUrl(dbUrl);
         basicDataSource.setUsername(username);
