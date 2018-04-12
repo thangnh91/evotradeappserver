@@ -35,9 +35,10 @@ public class HomeController {
 	/**
 	 * EVOlution
 	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	@RequestMapping(value = "/api/evo/tick", method = RequestMethod.GET, produces = "application/json")
-	public Timestamp getTick() throws SQLException {
+	public Timestamp getTick() throws SQLException, ClassNotFoundException {
 		return EvoTestDao.getInstance().getTick();
 	}
 	

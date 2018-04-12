@@ -19,8 +19,8 @@ public class EvoTestDao extends ConfigDao {
 		return instance;
 	}
 	
-	public Timestamp getTick() throws SQLException {
-        Statement stmt = dataSource.getConnection().createStatement();
+	public Timestamp getTick() throws SQLException, ClassNotFoundException {
+        Statement stmt = getConnection().createStatement();
         stmt.executeUpdate("DROP TABLE IF EXISTS ticks");
         stmt.executeUpdate("CREATE TABLE ticks (tick timestamp)");
         stmt.executeUpdate("INSERT INTO ticks VALUES (now())");

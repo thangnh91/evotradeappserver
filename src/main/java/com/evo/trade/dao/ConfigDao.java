@@ -2,6 +2,9 @@ package com.evo.trade.dao;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -23,6 +26,11 @@ public class ConfigDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public Connection getConnection() throws ClassNotFoundException, SQLException {
+		Class.forName("org.postgresql.Driver");
+		return DriverManager.getConnection(System.getenv("JDBC_DATABASE_URL"));
 	}
 	
 
