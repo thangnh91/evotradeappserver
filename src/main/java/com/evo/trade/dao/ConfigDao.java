@@ -1,5 +1,12 @@
 package com.evo.trade.dao;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.dbcp.BasicDataSource;
+
 public class ConfigDao {
 	public static final int PROPERTY = 0;
 	public static final int FILE = 1;
@@ -9,6 +16,29 @@ public class ConfigDao {
 	
 	public ConfigDao() {
 		// TODO Auto-generated constructor stub
+		try {
+			dataSource = dataSource();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
 
+    protected DataSource dataSource;
+
+	public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + dbUri.getPath();
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
+    }
 }

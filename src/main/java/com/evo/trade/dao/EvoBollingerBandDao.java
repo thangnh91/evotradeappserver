@@ -20,6 +20,7 @@ public class EvoBollingerBandDao extends ConfigDao {
 
 	private EvoBollingerBandDao() {
 		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public static EvoBollingerBandDao getInstance() {

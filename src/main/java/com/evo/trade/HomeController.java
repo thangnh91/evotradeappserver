@@ -1,5 +1,7 @@
 package com.evo.trade;
 
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,11 +19,12 @@ import com.coinmarketcap.api.client.impl.CoinmarketcapApiService;
 import com.evo.trade.HomeController.BollingerBandResponse;
 import com.evo.trade.HomeController.Sortbypercentage;
 import com.evo.trade.dao.EvoBollingerBandDao;
+import com.evo.trade.dao.EvoTestDao;
 import com.evo.trade.objects.BollingerBand;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:4200", "https://evotradeapp.herokuapp.com", "https://dreamerstradeapp.herokuapp.com" })
+@CrossOrigin(origins = {"http://localhost:4200", "https://evocoinapp.herokuapp.com", "https://evotradeapp.herokuapp.com" })
 public class HomeController {
 
 	@RequestMapping("/")
@@ -31,7 +34,19 @@ public class HomeController {
 	
 	/**
 	 * EVOlution
+	 * @throws SQLException 
 	 */
+	@RequestMapping(value = "/api/evo/tick", method = RequestMethod.GET, produces = "application/json")
+	public Timestamp getTick() throws SQLException {
+		return EvoTestDao.getInstance().getTick();
+	}
+	
+	@RequestMapping(value = "/api/evo/timestamp", method = RequestMethod.GET, produces = "application/json")
+	public Timestamp getTimestame() {
+		Timestamp timestamp = getTimestame();
+		return timestamp;
+	}
+	
 	class BollingerBandResponse {
 		public @JsonProperty("LastUpdated") Long lastUpdated;
     	public @JsonProperty("OutOfUpperBB") List<BollingerBand> ooUpperBBs;

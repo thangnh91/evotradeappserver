@@ -16,15 +16,15 @@ public class EvotradeappserverApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EvotradeappserverApplication.class, args);
 		
-		AllMarketTickers allMarketTickers = new AllMarketTickers();
+//		AllMarketTickers allMarketTickers = new AllMarketTickers();
 		
-		List<CandlestickInterval> candlestickIntervals = new ArrayList<>();
-		candlestickIntervals.add(CandlestickInterval.FIVE_MINUTES);
-		candlestickIntervals.add(CandlestickInterval.HALF_HOURLY);
-		candlestickIntervals.add(CandlestickInterval.HOURLY);
-		candlestickIntervals.add(CandlestickInterval.FOUR_HOURLY);
-		candlestickIntervals.add(CandlestickInterval.DAILY);
-		candlestickIntervals.add(CandlestickInterval.WEEKLY);
-		EvoBollingerBandService evoBBService = new EvoBollingerBandService(candlestickIntervals);
+//		List<CandlestickInterval> candlestickIntervals = new ArrayList<>();
+//		candlestickIntervals.add(CandlestickInterval.FIVE_MINUTES);
+//		candlestickIntervals.add(CandlestickInterval.HALF_HOURLY);
+//		candlestickIntervals.add(CandlestickInterval.HOURLY);
+//		candlestickIntervals.add(CandlestickInterval.FOUR_HOURLY);
+//		candlestickIntervals.add(CandlestickInterval.DAILY);
+//		candlestickIntervals.add(CandlestickInterval.WEEKLY);
+//		EvoBollingerBandService evoBBService = new EvoBollingerBandService(candlestickIntervals);
 	}
 }
