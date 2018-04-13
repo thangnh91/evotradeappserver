@@ -77,15 +77,8 @@ public class HomeController {
 		return EvoUserDao.getInstance().deleteUser(id);
 	}
 	
-	class AuthenticateObject {
-		@JsonProperty("username") String username;
-		@JsonProperty("password") String password;
-	}
 	@RequestMapping(value = "/api/evo/authenticate", method = RequestMethod.POST, produces = "application/json")
-	public User authenticateUser(@RequestBody  AuthenticateObject auObj) throws ClassNotFoundException, SQLException {
-		User user = new User();
-		user.setUsername(auObj.username);
-		user.setPassword(auObj.password);
+	public User authenticateUser(@RequestBody  User user) throws ClassNotFoundException, SQLException {
 		return EvoUserDao.getInstance().authenticateUser(user);
 	}
 	
