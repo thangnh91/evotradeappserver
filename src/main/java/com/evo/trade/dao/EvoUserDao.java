@@ -27,12 +27,12 @@ public class EvoUserDao extends ConfigDao {
 		Connection conn = getConnection();
 		Statement stmt = conn.createStatement();
 		stmt.executeUpdate("CREATE TABLE IF NOT EXISTS "
-				+ "user(id SERIAL NOT NULL PRIMARY KEY,"
+				+ "users (id SERIAL NOT NULL PRIMARY KEY,"
 				+ "username varchar(225) NOT NULL UNIQUE,"
 				+ "password varchar(225),"
 				+ "firstName varchar(225),"
 				+ "lastName varchar(225),"
-				+ "role INT NOT NULL)");
+				+ "role INT NOT NULL);");
 		
 		stmt.close();
 		conn.close();
@@ -41,7 +41,7 @@ public class EvoUserDao extends ConfigDao {
 	
 	public List<User> getAllUsers() throws ClassNotFoundException, SQLException {
 		Statement stmt = getConnection().createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+		ResultSet rs = stmt.executeQuery("SELECT * FROM users");
 		List<User> users = new ArrayList<>();
 		while(rs.next()) {
 			User user = new User();
@@ -60,7 +60,7 @@ public class EvoUserDao extends ConfigDao {
 	
 	public User getUser(int id) throws ClassNotFoundException, SQLException {
 		Connection conn = getConnection();
-		PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM user WHERE id = ?;");
+		PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM users WHERE id = ?;");
 		pstmt.setInt(1, id);
 		ResultSet rs = pstmt.executeQuery();
 		User user = new User();
@@ -81,7 +81,7 @@ public class EvoUserDao extends ConfigDao {
 	
 	public boolean createUser(User user) throws ClassNotFoundException, SQLException {
 		Connection conn = getConnection();
-		String sql = "SELECT * FROM user WHERE username = ?;";
+		String sql = "SELECT * FROM users WHERE username = ?;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUsername());
 		ResultSet rs = pstmt.executeQuery();
@@ -94,7 +94,7 @@ public class EvoUserDao extends ConfigDao {
 			}
 		}
 		
-		sql = "INSERT INTO user (username, password, firstName, lastName, role) "
+		sql = "INSERT INTO users (username, password, firstName, lastName, role) "
 				+ "VALUES (?, ?, ?, ?, ?, ?);";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUsername());
@@ -112,7 +112,7 @@ public class EvoUserDao extends ConfigDao {
 	
 	public boolean updateUser(int id, User user) throws ClassNotFoundException, SQLException {
 		Connection conn = getConnection();
-		String sql = "UPDATE user "
+		String sql = "UPDATE users "
 				+ "SET password = ?, firstName = ?, lastName = ?, role = ?"
 				+ "WHERE id = ?;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -131,7 +131,7 @@ public class EvoUserDao extends ConfigDao {
 	
 	public boolean deleteUser(int id) throws ClassNotFoundException, SQLException {
 		Connection conn = getConnection();
-		String sql = "DELETE FROM user WHERE id = ?;";
+		String sql = "DELETE FROM users WHERE id = ?;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, id);
 		
@@ -144,7 +144,7 @@ public class EvoUserDao extends ConfigDao {
 	
 	public User authenticateUser(User user) throws ClassNotFoundException, SQLException {
 		Connection conn = getConnection();
-		String sql = "SELECT * FROM user WHERE username = ? AND password = ?;";
+		String sql = "SELECT * FROM users WHERE username = ? AND password = ?;";
 		PreparedStatement pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, user.getUsername());
 		pstmt.setString(2, user.getPassword());
