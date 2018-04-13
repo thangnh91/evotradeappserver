@@ -77,6 +77,18 @@ public class HomeController {
 		return EvoUserDao.getInstance().deleteUser(id);
 	}
 	
+	class AuthenticateObject {
+		String username;
+		String password;
+	}
+	@RequestMapping(value = "/api/evo/authenticate", method = RequestMethod.DELETE, produces = "application/json")
+	public User authenticateUser(@RequestBody  AuthenticateObject auObj) throws ClassNotFoundException, SQLException {
+		User user = new User();
+		user.setUsername(auObj.username);
+		user.setPassword(auObj.password);
+		return EvoUserDao.getInstance().authenticateUser(user);
+	}
+	
 	class BollingerBandResponse {
 		public @JsonProperty("LastUpdated") Long lastUpdated;
     	public @JsonProperty("OutOfUpperBB") List<BollingerBand> ooUpperBBs;
