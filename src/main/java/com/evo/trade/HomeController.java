@@ -78,8 +78,8 @@ public class HomeController {
 	}
 	
 	class AuthenticateObject {
-		String username;
-		String password;
+		@JsonProperty("username") String username;
+		@JsonProperty("password") String password;
 	}
 	@RequestMapping(value = "/api/evo/authenticate", method = RequestMethod.POST, produces = "application/json")
 	public User authenticateUser(@RequestBody  AuthenticateObject auObj) throws ClassNotFoundException, SQLException {
